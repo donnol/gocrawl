@@ -45,18 +45,24 @@ func saveImage(url string) {
 	if err != nil {
 		panic(err)
 	}
+
 	// 目录
-	Dirname := "/donnol/Project/Tool/src/crawlmeizi/tmp/" + time.Now().Format("2006-01-02") + "/"
+	Dirname := "./tmp/" + time.Now().Format("2006-01-02") + "/"
 	if !isDirExist(Dirname) {
-		os.Mkdir(Dirname, 0755)
+		err = os.MkdirAll(Dirname, 0755)
+		if err != nil {
+			panic(err)
+		}
 		fmt.Printf("dir %s created\n", Dirname)
 	}
+
 	// 文件
 	filename := filepath.Base(url)
 	dst, err := os.Create(Dirname + filename)
 	if err != nil {
 		panic(err)
 	}
+
 	// 写入文件
 	io.Copy(dst, res.Body)
 }
