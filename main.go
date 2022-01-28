@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	url := "http://www.mzitu.com/model"
+	url := "https://mmzztt.com/"
 	crawl(url)
 }
 
@@ -41,6 +41,9 @@ func crawl(url string) []string {
 func saveImage(url string) {
 	// 图片内容
 	res, err := http.Get(url)
+	if err != nil {
+		panic(err)
+	}
 	defer res.Body.Close()
 	if err != nil {
 		panic(err)
